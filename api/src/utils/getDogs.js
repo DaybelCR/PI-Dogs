@@ -13,8 +13,8 @@ const arrayDogsApi=data.map(objDog=>{
         height:objDog.height.metric,
         weigth:objDog.weight.metric,
         life_span:objDog.life_span,
-        image:objDog.image.url,
-        temperaments:objDog.temperament?.split(', ')
+        image:objDog.image.url?objDog.image.url:null,
+        temperaments:objDog.temperament?objDog.temperament:null
     }
 })
 return arrayDogsApi;
@@ -26,6 +26,7 @@ const dogsDb=await Dog.findAll({include:{model:Temperament,
 const arrayDogsDb=dogsDb.map(r=>{
     r.dataValues.temperaments=r.dataValues.temperaments
                                           .map(s=>s.name)
+                                          .join(',')
     return r.dataValues;
 })
 return arrayDogsDb;
@@ -37,4 +38,20 @@ const getDogs=async()=>{
     return api.concat(db);
 }
 
-module.exports=getDogs;
+const searchName=async (name)=>{
+   const {data}= await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}&&api_key=${API_KEY}`)
+   const arrayDogsByName=data.map(objDog=>{
+    return{
+        id:objDog.id,
+        name:objDog.name,
+        height:objDog.height.metric,
+        weigth:objDog.weight.metric,
+        life_span:objDog.life_span,
+        image:null,
+        temperaments:objDog.temperament?objDog.temperament:null
+    }
+ })
+   return arrayDogsByName;
+}
+
+module.exports={getDogs,searchName};
