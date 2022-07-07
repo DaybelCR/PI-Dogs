@@ -1,9 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import MenuSelect from '../MenuSelect/MenuSelect';
+import NavBar from '../NavBar/NavBar';
+import CardsDogs from '../CardsDogs/CardsDogs';
 
-export default class home extends Component {
+
+export default class Home extends Component {
   render() {
     return (
-      <div>home</div>
+      <>
+      <NavBar/>
+      <MenuSelect/>
+      <CardsDogs/>
+      </>
     )
   }
 }

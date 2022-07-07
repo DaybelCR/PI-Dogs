@@ -11,7 +11,7 @@ const arrayDogsApi=data.map(objDog=>{
         id:objDog.id,
         name:objDog.name,
         height:objDog.height.metric,
-        weigth:objDog.weight.metric,
+        weight:objDog.weight.metric,
         life_span:objDog.life_span,
         image:objDog.image.url?objDog.image.url:null,
         temperaments:objDog.temperament?objDog.temperament:null
@@ -45,7 +45,7 @@ const searchName=async (name)=>{
         id:objDog.id,
         name:objDog.name,
         height:objDog.height.metric,
-        weigth:objDog.weight.metric,
+        weight:objDog.weight.metric,
         life_span:objDog.life_span,
         image:null,
         temperaments:objDog.temperament?objDog.temperament:null
