@@ -5,6 +5,7 @@ const {getDogs,searchName}=require('../utils/getDogs.js');
 const {Dog}=require('../db.js');
 
 let arrayResult=[];
+
 dogRouter.get('/',async(req,res)=>{
 const {name}=req.query;
 if(name){
@@ -17,7 +18,7 @@ getDogs()
             if(!result.length){return res.status(404).json({message:"The data was not found"})} 
             else{
                 arrayResult=[...result];
-                return res.json(result)
+                return res.json(result);
             } 
          })
     }else{
@@ -41,6 +42,7 @@ getDogs()
     if(!dogId){
         if(arrayResult.length>0){
             const objId=arrayResult.find(obj=>String(obj.id)===idRaza);
+            arrayResult=[];
             return res.json(objId);
         }else{
             return res.status(404).json({message:'The data was not found'})

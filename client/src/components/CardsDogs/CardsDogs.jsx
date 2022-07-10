@@ -1,19 +1,15 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import {useSelector,useDispatch} from 'react-redux';
-import { getAllDogs } from '../../redux/action';
+
 import imageNotFound from '../../assets/image_not_found.png';
 
 
-export default function CardsDogs() {
-const dogs=useSelector(state=>state.dogs);
-const dispatch=useDispatch();
-useEffect(()=>
- dispatch(getAllDogs()),[dispatch])
+export default function CardsDogs({dogsPerPage}) {
+
 
   return (
     <div>
-      {dogs&&dogs?.map(objDogs=><CardDog
+      {dogsPerPage&&dogsPerPage?.map(objDogs=><CardDog
       key={objDogs.id}
       id={objDogs.id}
       name={objDogs.name}
@@ -30,14 +26,13 @@ export function CardDog({id,name,weight,image,temperaments}){
   return(
    <Link to={`/detailDog/${id}`}>
    <div>
-      <p>{name}</p>
-      <p>{weight}</p>
+      <h2>{name}</h2>
+      <p>Weight : {weight} kg</p>
       <img src={image?image:imageNotFound}
       width="300" height="200" alt='dog'/>
-      <p>{temperaments}</p>
+      {temperaments?(<p>{temperaments}</p>):(<p>Unknown</p>)}
     </div>
    </Link> 
   )
 }
-
 

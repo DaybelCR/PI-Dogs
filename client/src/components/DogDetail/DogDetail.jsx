@@ -10,16 +10,18 @@ export class DogDetail extends Component {
   }
 
   render() {
-   const {name,height,weight,image,life_span}=this.props.dogDetail;
+   const {name,height,weight,image,life_span,temperaments}=this.props.dogDetail;
+
     return (
       <div>
         <img src={image?image:
           'https://www.seekpng.com/png/full/360-3605845_dog-holding-paper-in-mouth.png'}
            width="600" height="400" alt='dog-detail'/>
-         <p>Name : {name}</p>
-         <p>Height : {height}</p>
-         <p>Weight : {weight}</p>
+           <h2>Name : {name}</h2>
+           <p>Height : {height} cm</p>
+           <p>Weight : {weight} kg</p>
          <p>Life Span : {life_span}</p>
+         {temperaments?(<p>Temperaments : {temperaments} </p>):null}
       </div>
     )
   }

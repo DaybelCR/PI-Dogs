@@ -15,9 +15,10 @@ export class NavBar extends Component {
         this.setState({name:e.target.value})
       }
     handleSubmit=(e)=>{
-        e.preventDefault();
-       // console.log(this.state.name)
-      this.props.onSearchByName(this.state.name)
+    e.preventDefault();
+      if(!this.state.name) return alert ('Please,write a name');
+      this.props.onSearchByName(this.state.name);
+      this.setState({name:''});
     }
    
 
@@ -34,7 +35,7 @@ export class NavBar extends Component {
             </ul>
         </nav>
         <form onSubmit={(e)=>this.handleSubmit(e)}>
-            <input type="text" placeholder='Search By Name' onChange={(e)=>this.handleOnChange(e)}
+            <input type="text" placeholder='Search By Breed' onChange={(e)=>this.handleOnChange(e)}
              value={this.state.name} />
             <input type="submit" value="Search" />
         </form>

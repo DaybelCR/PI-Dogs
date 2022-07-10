@@ -23,10 +23,15 @@ export  function onSearchByName(name){
     return async function(dispatch){
         const response=await fetch(`http://localhost:3001/dogs?name=${name}`);
         const data=await response.json();
-        return dispatch({
-            type:ON_SEARCH_DOGS_BY_NAME,
-            payload:data
-        })
+        if(Array.isArray(data)){
+            return dispatch({
+                type:ON_SEARCH_DOGS_BY_NAME,
+                payload:data
+            })
+        }else{
+            return alert(data.message);
+        }
+       
     }
 }
 

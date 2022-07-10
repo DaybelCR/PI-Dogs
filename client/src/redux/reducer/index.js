@@ -1,7 +1,8 @@
-import { GET_DOGDETAIL, GET_DOGS, GET_TEMPERAMENTS, ON_SEARCH_DOGS_BY_NAME } from "../action/actionTypes";
+import { FILTER_BY_TEMPERAMENT, FILTER_BY_TYPE_DATA, GET_DOGDETAIL, GET_DOGS, GET_TEMPERAMENTS, ON_SEARCH_DOGS_BY_NAME, ORDER_BY_NAME, ORDER_BY_WEIGTH } from "../action/actionTypes";
 
 const initialState={
     dogs:[],
+    alldogs:[],
     temperaments:[],
     dogDetail:{}
 }
@@ -16,7 +17,8 @@ switch(type){
     case GET_DOGS:
         return{
         ...state,
-        dogs:payload
+        dogs:payload,
+        alldogs:payload
     }
     case GET_DOGDETAIL:
         return{
@@ -28,9 +30,51 @@ switch(type){
         ...state,
         dogs:payload
         }
+    case FILTER_BY_TEMPERAMENT:
+        const alldogs=state.alldogs;
+        const dogFilteredByTemperament=payload==="All-Temperaments"?
+        alldogs:
+        alldogs.filter(obj=>obj.temperaments?.includes(payload));
+        return {
+            ...state,
+        dogs:dogFilteredByTemperament
+        }
+    case FILTER_BY_TYPE_DATA:
+        const alldogsTwo=state.alldogs;
+        const dogFilteredByData=payload==="Api"?
+        alldogsTwo.filter(obj=>!obj.created):
+        alldogsTwo.filter(obj=>obj.created)
+        return {
+            ...state,
+            dogs:payload==="All-Data"?alldogsTwo:dogFilteredByData
+        }
+    case ORDER_BY_NAME:
+        const dogsSortByName=payload==='A-Z'&& payload!==''?
+        state.dogs.sort((a,b)=>{
+            if(a.name.toLowerCase()<b.name.toLowerCase()) return -1;
+            if(a.name.toLowerCase()>b.name.toLowerCase()) return 1;
+            return 0;  //  
+        }):
+        state.dogs.sort((a,b)=>{
+            if(a.name.toLowerCase()<b.name.toLowerCase()) return 1;
+            if(a.name.toLowerCase()>b.name.toLowerCase()) return -1;
+            return 0;
+        })
+        return{
+            ...state,
+            dogs:dogsSortByName
+        }
+    case ORDER_BY_WEIGTH:
+        const dogsSortByWeigth=payload==='lower-higher'&& payload!==''?
+        state.dogs.sort((a,b)=>Number(a.weight?.split('-')[0])-Number(b.weight?.split('-')[0])):
+        state.dogs.sort((a,b)=>Number(b.weight?.split('-')[0])-Number(a.weight?.split('-')[0]))
+        return{
+            ...state,
+            dogs:dogsSortByWeigth
+        }
     default:
      return {
-        ...state
+        ...state,
     }
 }
 }

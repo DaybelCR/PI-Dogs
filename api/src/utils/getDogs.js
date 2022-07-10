@@ -11,7 +11,8 @@ const arrayDogsApi=data.map(objDog=>{
         id:objDog.id,
         name:objDog.name,
         height:objDog.height.metric,
-        weight:objDog.weight.metric,
+        weight:objDog.weight.metric==='NaN'?'21 - 28':
+        (objDog.weight.metric==='NaN - 8')?'6 - 8':objDog.weight.metric,
         life_span:objDog.life_span,
         image:objDog.image.url?objDog.image.url:null,
         temperaments:objDog.temperament?objDog.temperament:null
@@ -45,9 +46,10 @@ const searchName=async (name)=>{
         id:objDog.id,
         name:objDog.name,
         height:objDog.height.metric,
-        weight:objDog.weight.metric,
+        weight:objDog.weight.metric==='NaN'?'21 - 28':
+        (objDog.weight.metric==='NaN - 8')?'6 - 8':objDog.weight.metric,
         life_span:objDog.life_span,
-        image:null,
+        image:`https://cdn2.thedogapi.com/images/${objDog.reference_image_id}.jpg`,
         temperaments:objDog.temperament?objDog.temperament:null
     }
  })
