@@ -3,7 +3,7 @@ import {useSelector,useDispatch} from 'react-redux';
 import {getTemperaments,filterByTemperament,filterByTypeData,orderByName,orderByWeigth}
 from '../../redux/action';
 
-export default function MenuSelect({setOrder}) {
+export default function MenuSelect({setOrder,setCurrentPage}) {
 const temperaments=useSelector(state=>state.temperaments);
 const dispatch=useDispatch();
 
@@ -13,21 +13,24 @@ const dispatch=useDispatch();
  
  const handleChangeFilterTemp=(e)=>{
   dispatch(filterByTemperament(e.target.value));
+  setCurrentPage(1);
  }
 const handleChangeFilterData=(e)=>{
   dispatch(filterByTypeData(e.target.value));
+  setCurrentPage(1);
  }
  const handleChangeSortByName=(e)=>{
   dispatch(orderByName(e.target.value));
-  setOrder(`Sort by Name ${e.target.value}`)
+  setOrder(`Sort by Name ${e.target.value}`);
+  setCurrentPage(1);
 }
 const handleChangeSortByWeight=(e)=>{
   dispatch(orderByWeigth(e.target.value));
-  setOrder(`Sort by Weigth ${e.target.value}`)
+  setOrder(`Sort by Weigth ${e.target.value}`);
+  setCurrentPage(1);
 }
   return (
     <div>
-        FILTRAR
         <select onChange={(e)=>handleChangeFilterTemp(e)}>
             <option value='All-Temperaments'>All Temperaments</option>
             {temperaments&& temperaments?.map(t=>(<option key={t.id} value={t.name}>{t.name}</option>))}

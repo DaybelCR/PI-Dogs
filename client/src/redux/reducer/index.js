@@ -1,4 +1,4 @@
-import { FILTER_BY_TEMPERAMENT, FILTER_BY_TYPE_DATA, GET_DOGDETAIL, GET_DOGS, GET_TEMPERAMENTS, ON_SEARCH_DOGS_BY_NAME, ORDER_BY_NAME, ORDER_BY_WEIGTH } from "../action/actionTypes";
+import { FILTER_BY_TEMPERAMENT, FILTER_BY_TYPE_DATA, GET_DOGDETAIL, GET_DOGS, GET_TEMPERAMENTS, ON_SEARCH_DOGS_BY_NAME, ORDER_BY_NAME, ORDER_BY_WEIGTH ,POST_DOG} from "../action/actionTypes";
 
 const initialState={
     dogs:[],
@@ -72,10 +72,12 @@ switch(type){
             ...state,
             dogs:dogsSortByWeigth
         }
+    case POST_DOG:
+        return{
+            ...state
+        }
     default:
-     return {
-        ...state,
-    }
+     return state;
 }
 }
 

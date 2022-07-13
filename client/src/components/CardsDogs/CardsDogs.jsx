@@ -6,21 +6,32 @@ import imageNotFound from '../../assets/image_not_found.png';
 
 export default function CardsDogs({dogsPerPage}) {
 
-
-  return (
-    <div>
-      {dogsPerPage&&dogsPerPage?.map(objDogs=><CardDog
-      key={objDogs.id}
-      id={objDogs.id}
-      name={objDogs.name}
-      weight={objDogs.weight}
-      image={objDogs.image}
-      temperaments={objDogs.temperaments}
-      />
-      )}
-    </div>
-  )
+  if(dogsPerPage.length>0){
+    return (
+   <div>
+        {dogsPerPage&&dogsPerPage?.map(objDogs=><CardDog
+        key={objDogs.id}
+        id={objDogs.id}
+        name={objDogs.name}
+        weight={objDogs.weight}
+        image={objDogs.image}
+        temperaments={objDogs.temperaments}
+        />
+        )}
+      </div>
+    )
+  }else{
+    return(
+       <div>
+        <img src="https://cdn.dribbble.com/users/440966/screenshots/5367124/404-error-luckydog.gif" 
+        width="600" height="350" alt="gif-error-404" />
+        <h3>ERROR 404</h3>
+        <p>We can't find what you are looking for :{"("} </p>
+       </div>
+    )
+  }
 }
+
 
 export function CardDog({id,name,weight,image,temperaments}){
   return(
@@ -35,4 +46,3 @@ export function CardDog({id,name,weight,image,temperaments}){
    </Link> 
   )
 }
-

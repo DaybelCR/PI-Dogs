@@ -1,9 +1,12 @@
 import React, { useState,useEffect } from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import { getAllDogs } from '../../redux/action';
+
 import MenuSelect from '../MenuSelect/MenuSelect';
 import NavBar from '../NavBar/NavBar';
 import CardsDogs from '../CardsDogs/CardsDogs';
+
+import s from './Home.module.css';
 
 
 export default function Home() {
@@ -12,9 +15,12 @@ const dispatch=useDispatch();
 useEffect(()=>
  dispatch(getAllDogs()),[dispatch])
 
+ const [loading,setLoading]=useState(true);
+ // eslint-disable-next-line
+useEffect(()=>{setTimeout(()=>{setLoading(!loading)},3000)},[setLoading])
+
   // eslint-disable-next-line
 const[order,setOrder]=useState('');
-
 const [currentPage,setCurrentPage]=useState(1);
 // eslint-disable-next-line
 const [perPage,setPerPage]=useState(8);
@@ -30,19 +36,29 @@ let arr=[];
      const goNextPage=()=>{setCurrentPage(()=>currentPage+1)};
     return (
       <>
-      <NavBar/>
+      <NavBar
+       setCurrentPage={setCurrentPage}
+      />
       <MenuSelect 
+      setCurrentPage={setCurrentPage}
       setOrder={setOrder}
       />
+
       <div>
       {currentPage===1||currentPage<1?null:(<button onClick={goPreviusPage}>Previus</button>)} 
-       {arr.map(page=><button key={page} onClick={()=>handleClick(page)}>{page}</button>)} 
+       {arr.map(page=><button className={page===currentPage?`${s.pages} ${s.active}`:s.pages} key={page} onClick={()=>handleClick(page)}>{page}</button>)} 
       {currentPage===max||currentPage>max?null:(<button onClick={goNextPage}>Next</button>)} 
       </div>
-      <CardsDogs
+
+      {loading?
+       (<div>
+        <img src='https://static.solvpath.com/media/images/8/processing_gif_petjoy.gif' 
+         alt='gif-loading'/>
+        </div>):
+       <CardsDogs
        dogsPerPage={dogsPerPage}
        />
+      }
       </>
     )
   }
-

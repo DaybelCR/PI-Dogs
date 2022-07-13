@@ -27,7 +27,7 @@ const dogsDb=await Dog.findAll({include:{model:Temperament,
 const arrayDogsDb=dogsDb.map(r=>{
     r.dataValues.temperaments=r.dataValues.temperaments
                                           .map(s=>s.name)
-                                          .join(',')
+                                          .join(', ')
     return r.dataValues;
 })
 return arrayDogsDb;

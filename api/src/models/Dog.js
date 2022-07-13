@@ -25,7 +25,10 @@ module.exports = (sequelize) => {
     },
     life_span:{
       type:DataTypes.STRING,
-      allowNull:false
+      allowNull:false,
+      set(value) {
+        this.setDataValue('life_span', value +' years');
+      }
     },
     image:{
       type:DataTypes.TEXT,

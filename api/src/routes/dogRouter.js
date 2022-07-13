@@ -2,7 +2,7 @@ const {Router}=require("express");
 dogRouter=Router();
 
 const {getDogs,searchName}=require('../utils/getDogs.js');
-const {Dog}=require('../db.js');
+const {Dog,Temperament}=require('../db.js');
 
 let arrayResult=[];
 
@@ -15,7 +15,7 @@ getDogs()
     if(!nameFound.length){
         searchName(name)
         .then(result=>{
-            if(!result.length){return res.status(404).json({message:"The data was not found"})} 
+            if(!result.length){return res.status(404).json({message:"Sorry :( ,The data was not found"})} 
             else{
                 arrayResult=[...result];
                 return res.json(result);
@@ -45,7 +45,7 @@ getDogs()
             arrayResult=[];
             return res.json(objId);
         }else{
-            return res.status(404).json({message:'The data was not found'})
+            return res.status(404).json({message:'Sorry :( ,The data was not found'})
         }
     }
     return res.json(dogId);
@@ -54,16 +54,17 @@ getDogs()
 })
 
 dogRouter.post('/',async(req,res)=>{
-const{name,height,weigth,life_span,image,temperament}=req.body;
+const{name,height,weight,life_span,image,temperaments}=req.body;
 try{
 let dogCreated=await Dog.create({
     name,
     height,
-    weigth,
+    weight,
     life_span,
     image
 });
-dogCreated.addTemperament(temperament);
+const temperamentsDb=await Temperament.findAll({where:{name:temperaments}})
+dogCreated.addTemperament(temperamentsDb);
 return res.json({message: 'Dog created,successfully'})
 }catch(e){
     return res.status(500).json({message:e.message});

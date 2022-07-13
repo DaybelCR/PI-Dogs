@@ -88,3 +88,9 @@ export function orderByWeigth(payload){
     
 }
 
+export function postDog(payload){
+    return async function(dispatch){
+        axios.post('http://localhost:3001/dogs',payload)
+            .then(response=>response)
+   }
+}
