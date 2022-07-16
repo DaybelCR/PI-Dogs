@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import imageDog from '../../assets/dog.jpg';
+
+import s from './Landing.module.css';
 
 export default function Landing() {
-  return (<div>
-           <h1>Dog App</h1>
-           <img src={imageDog} width="700" height="500" alt='img-dog'/>
-           <Link to='/home'>Go Home</Link>
+  return (<div className={s.landing}>
+           <div className={s.div}>
+           <h1>Welcome to Dogs App .<span>&#160;</span></h1>
+           <Link to='/home' className={s.link}>Start</Link>
+           </div>
           </div>
           )
 }

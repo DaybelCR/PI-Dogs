@@ -1,0 +1,98 @@
+.cards{
+    background-image: linear-gradient(50deg, rgba(70, 130, 180,0.6), rgba(0, 0, 139,0.73)),url(https://st2.depositphotos.com/1106005/8169/i/450/depositphotos_81696382-stock-photo-teal-and-white-doggy-tile.jpg);
+    margin:13rem 0rem 0rem 0rem;
+    padding:1rem 6rem 2rem 5rem;
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 3vw;
+}
+.cards .link{
+text-decoration: none;
+}
+.card{
+    display: flex;
+    z-index:15;
+    margin: 0;
+    padding:0;
+    background-color: #3c7575b1;
+    flex-direction: column;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    box-shadow: 0 0 3rem #0008 inset;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(5px);
+    transition:all 1s ease;
+    transform: rotate(2deg);
+}
+.card:hover{
+    transform: scale(1.10);
+}
+.card h2{
+    color: rgb(247, 244, 249);
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: cursive;
+    color:rgb(240, 243, 246);
+    margin-bottom:0;
+    padding-bottom: 0;
+   }
+.card p{
+    font-size:1rem;
+    color:black;
+    font-weight: 600;
+    margin:0.7rem 2rem 0.7rem 2rem;
+    padding: 0.5rem 0rem 0.5rem 0rem;
+}
+.card img{
+    border-top-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.error{
+    position: relative;
+    margin-top:12rem;
+}
+.error img{
+    width: 50%;
+    opacity: 0.8;
+    border-radius: 0.2rem;
+    box-shadow: 5px 8px 12px black;
+}
+.error h3{
+    font-size: 3rem;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: rgb(49, 120, 150);
+    font-family: cursive;
+}
+.error p{
+    font-size: 1.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-family: cursive;
+    padding: 0.5rem;
+}
+@media (max-width: 800px) {
+    .cards{
+        margin-top:25rem;
+        grid-template-columns: 1fr 1fr ;
+    }
+    .error{
+        margin-top:15rem;   
+    }
+  }
+
+  @media (max-width: 600px) {
+    .cards{
+        grid-template-columns: 1fr ;
+    }
+    .error{
+        margin-top:18rem;  
+    }
+  }
+

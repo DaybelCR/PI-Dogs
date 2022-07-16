@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import s from './CardsDogs.module.css';
 
 import imageNotFound from '../../assets/image_not_found.png';
 
@@ -8,7 +9,7 @@ export default function CardsDogs({dogsPerPage}) {
 
   if(dogsPerPage.length>0){
     return (
-   <div>
+   <div className={s.cards}>
         {dogsPerPage&&dogsPerPage?.map(objDogs=><CardDog
         key={objDogs.id}
         id={objDogs.id}
@@ -22,7 +23,7 @@ export default function CardsDogs({dogsPerPage}) {
     )
   }else{
     return(
-       <div>
+       <div className={s.error}>
         <img src="https://cdn.dribbble.com/users/440966/screenshots/5367124/404-error-luckydog.gif" 
         width="600" height="350" alt="gif-error-404" />
         <h3>ERROR 404</h3>
@@ -32,17 +33,18 @@ export default function CardsDogs({dogsPerPage}) {
   }
 }
 
-
 export function CardDog({id,name,weight,image,temperaments}){
   return(
-   <Link to={`/detailDog/${id}`}>
-   <div>
+   
+   <div className={s.card} title='Go Details'>
+     <Link to={`/detailDog/${id}`} className={s.link}>
       <h2>{name}</h2>
       <p>Weight : {weight} kg</p>
-      <img src={image?image:imageNotFound}
-      width="300" height="200" alt='dog'/>
+      <div> <img src={image?image:imageNotFound}
+      width="200" height="150" alt='dog'/></div>
       {temperaments?(<p>{temperaments}</p>):(<p>Unknown</p>)}
+      </Link> 
     </div>
-   </Link> 
+   
   )
 }

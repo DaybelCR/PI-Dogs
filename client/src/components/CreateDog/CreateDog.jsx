@@ -7,15 +7,15 @@ import s from './CreateDog.module.css';
 
 const validate=(input)=>{
   let errors={};
-  if(!input.name) errors.name='name is required';
-  else if(input.min_height==='0' && input.max_height==='0') errors.height='min and max height are required and can not be zero';
-  else if(Number(input.min_height)>=Number(input.max_height)) errors.height='the [min height] must be less than [the max height]';
-  else if(input.min_weight==='0' && input.max_weight==='0') errors.weight='min and max weight are required and can not be zero';
-  else if(Number(input.min_weight)>=Number(input.max_weight)) errors.weight='the [min weight] must be less than the [max weight]';
-  else if(input.min_lifeSpan==='0' && input.max_lifeSpan==='0') errors.life_span='min and max life span are required and can not be zero';
-  else if(Number(input.min_lifeSpan)>=Number(input.max_lifeSpan)) errors.life_span='the [min life span] must be less than the [max life span]';
+  if(!input.name) errors.name='Warning: name is required';
+  else if(input.min_height==='0' && input.max_height==='0') errors.height='Warning: min and max height are required and can not be zero';
+  else if(Number(input.min_height)>=Number(input.max_height)) errors.height='Warning: the [min height] must be less than [the max height]';
+  else if(input.min_weight==='0' && input.max_weight==='0') errors.weight='Warning: min and max weight are required and can not be zero';
+  else if(Number(input.min_weight)>=Number(input.max_weight)) errors.weight='Warning: the [min weight] must be less than the [max weight]';
+  else if(input.min_lifeSpan==='0' && input.max_lifeSpan==='0') errors.life_span='Warning: min and max life span are required and can not be zero';
+  else if(Number(input.min_lifeSpan)>=Number(input.max_lifeSpan)) errors.life_span='Warning: the [min life span] must be less than the [max life span]';
   else if(!input.image) errors.image='image is required';
-  else if(!input.temperaments.length) errors.temperaments='temperament is required';
+  else if(!input.temperaments.length) errors.temperaments='Warning: temperament is required';
   return errors;
 }
 export  function CreateDog({temperaments,getTemperaments,postDog,history}) {
@@ -107,11 +107,11 @@ export  function CreateDog({temperaments,getTemperaments,postDog,history}) {
   useEffect(()=>{getTemperaments()},[getTemperaments])
 
   return (
-    <div>
-       <Link to='/home'>Go to Home</Link>
+    <div className={s.box}>
+       <Link to='/home' className={s.link}>Go to Home</Link>
        <h3>Hi!! Here , can create a new breed</h3>
-       <button onClick={(e)=>resetAllData(e)}>Reset data</button>
        <form onSubmit={(e)=>handleSubmit(e)}>
+       <button onClick={(e)=>resetAllData(e)}>Reset data</button>
         <div>
         <label> Name : </label>
         <input type="text" name='name' placeholder='Breed' value={input.name} onChange={e=>handleInput(e)}/>
@@ -149,15 +149,18 @@ export  function CreateDog({temperaments,getTemperaments,postDog,history}) {
         <select onChange={(e) =>handleSelect(e)}>
             {temperaments&& temperaments?.map(t=>(<option key={t.id} value={t.name}>{t.name}</option>))}
        </select>
-            {input.temperaments.length > 0  
-            ? input.temperaments.map((el, i) => (
-              <div key={i}><p >{el}</p><button onClick={(e)=>deleteTemperament(e,el)}>X</button></div> ))
-            : null} 
          {errors.temperaments&&(<p className={s.danger}>{errors.temperaments}</p>)}
+         <div className={s.boxtemp}>
+       {input.temperaments.length > 0  
+            ? input.temperaments.map((el, i) => (
+              <div key={i}className={s.temp} ><p >{el}</p><button onClick={(e)=>deleteTemperament(e,el)}>X</button></div> ))
+            : null} 
+       </div>
         </div>
        </div>
-        <input type="submit" value="Create" />
+       <input type="submit" value="Create" />
        </form>
+     
     </div>
   )
 }

@@ -17,7 +17,7 @@ useEffect(()=>
 
  const [loading,setLoading]=useState(true);
  // eslint-disable-next-line
-useEffect(()=>{setTimeout(()=>{setLoading(!loading)},3000)},[setLoading])
+useEffect(()=>{setTimeout(()=>{setLoading(!loading)},2000)},[setLoading])
 
   // eslint-disable-next-line
 const[order,setOrder]=useState('');
@@ -35,7 +35,7 @@ let arr=[];
      const handleClick=(pag)=>{setCurrentPage(()=>pag)};
      const goNextPage=()=>{setCurrentPage(()=>currentPage+1)};
     return (
-      <>
+      <main className={s.main}>
       <NavBar
        setCurrentPage={setCurrentPage}
       />
@@ -44,14 +44,14 @@ let arr=[];
       setOrder={setOrder}
       />
 
-      <div>
-      {currentPage===1||currentPage<1?null:(<button onClick={goPreviusPage}>Previus</button>)} 
-       {arr.map(page=><button className={page===currentPage?`${s.pages} ${s.active}`:s.pages} key={page} onClick={()=>handleClick(page)}>{page}</button>)} 
-      {currentPage===max||currentPage>max?null:(<button onClick={goNextPage}>Next</button>)} 
+      <div className={max?s.pages:null}>
+      {currentPage===1||currentPage<1?null:(<button onClick={goPreviusPage}className={s.button}>Previus</button>)} 
+       {arr.map(page=><button className={page===currentPage?`${s.button} ${s.active}`:s.button} key={page} onClick={()=>handleClick(page)}>{page}</button>)} 
+      {currentPage===max||currentPage>max?null:(<button onClick={goNextPage} className={s.button}>Next</button>)} 
       </div>
 
       {loading?
-       (<div>
+       (<div className={s.loading}>
         <img src='https://static.solvpath.com/media/images/8/processing_gif_petjoy.gif' 
          alt='gif-loading'/>
         </div>):
@@ -59,6 +59,6 @@ let arr=[];
        dogsPerPage={dogsPerPage}
        />
       }
-      </>
+      </main>
     )
   }

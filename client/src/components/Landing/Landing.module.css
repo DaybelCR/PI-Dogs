@@ -1,0 +1,63 @@
+.landing{
+    background-color: rgb(49, 119, 159);
+    background-image: url('../../assets/image_landing.jpg');
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: cursive;
+}
+.div{
+    display: flex;
+    flex-direction: column;
+    margin-top: 6rem;
+    opacity: 0.3;
+    background-color: rgb(209, 194, 194);
+    padding: 1rem 0 5rem 0;
+
+}
+.landing h1{
+    float: left;
+    position: relative;
+    color: rgb(31, 28, 186);
+    font-size: 3.5rem;
+    box-shadow: 10px 5px 5px black;
+    background-color: rgb(193, 195, 176);
+}
+.landing span{
+    position: absolute;
+    right: 0;
+    width: 0;
+    background-color: rgb(193, 195, 176);
+    border-left: 0.1rem solid black;
+    animation: maquina 5s infinite alternate steps(21);
+}
+
+.link{
+    top:10rem;
+    text-decoration: none;
+    background-color: rgb(57, 20, 204);
+    padding: 0.5rem;
+    font-weight: 600;
+    font-size: 1.7rem;
+    color: aliceblue;
+}
+
+.link:hover{
+    background-color: rgb(253, 252, 255);
+    color: rgb(9, 8, 27);
+}
+
+@keyframes maquina{
+    from{
+        width:100%;
+    }
+    to{
+        width: 0;
+    }
+}

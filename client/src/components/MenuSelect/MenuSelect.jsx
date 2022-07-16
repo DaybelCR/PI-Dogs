@@ -3,6 +3,8 @@ import {useSelector,useDispatch} from 'react-redux';
 import {getTemperaments,filterByTemperament,filterByTypeData,orderByName,orderByWeigth}
 from '../../redux/action';
 
+import s from './MenuSelect.module.css'
+
 export default function MenuSelect({setOrder,setCurrentPage}) {
 const temperaments=useSelector(state=>state.temperaments);
 const dispatch=useDispatch();
@@ -30,8 +32,9 @@ const handleChangeSortByWeight=(e)=>{
   setCurrentPage(1);
 }
   return (
-    <div>
-        <select onChange={(e)=>handleChangeFilterTemp(e)}>
+    <div className={s.menu}>
+      <div>
+      <select onChange={(e)=>handleChangeFilterTemp(e)}>
             <option value='All-Temperaments'>All Temperaments</option>
             {temperaments&& temperaments?.map(t=>(<option key={t.id} value={t.name}>{t.name}</option>))}
         </select>
@@ -40,8 +43,9 @@ const handleChangeSortByWeight=(e)=>{
             <option value='Api'>From Api</option>
             <option value='DataBase'>From DataBase</option>
         </select>
-       
-        <select onChange={(e)=>handleChangeSortByName(e)}>
+      </div>
+       <div>
+       <select onChange={(e)=>handleChangeSortByName(e)}>
             <option value=''>Sort by Name</option>
             <option value='A-Z'>From A to Z</option>
             <option value='Z-A'>From Z to A</option>
@@ -51,6 +55,8 @@ const handleChangeSortByWeight=(e)=>{
             <option value='lower-higher'>Lower to Higher  ⬇</option>
             <option value='higher-lower'>Higher to Lower  ⬆</option>
         </select>
+       </div>
+        
     </div>
   )
 }

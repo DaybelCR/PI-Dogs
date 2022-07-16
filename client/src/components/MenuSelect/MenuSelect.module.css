@@ -1,0 +1,35 @@
+.menu{
+    position: fixed;
+    z-index:25;
+    top:5.6rem;
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center; 
+    padding: 0.5rem;
+    background-color:  rgba(53, 51, 155, 0.15);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    backdrop-filter: blur(5px);
+}
+.menu select{
+    margin:0.3rem;
+    padding: 0.5rem;
+    width: 11rem;
+    border-radius: 0.2rem;
+    font-size: 1rem;
+    outline: 0;
+    font-family: cursive;
+}
+.menu option{
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.2rem;
+    background-color: rgb(109, 167, 194);
+    font-family: cursive;
+}
+@media (max-width: 800px) {
+    .menu{
+        top:11rem;
+        flex-direction: column;
+    }
+  }
