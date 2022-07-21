@@ -46,12 +46,12 @@ const handleChangeSortByWeight=(e)=>{
       </div>
        <div>
        <select onChange={(e)=>handleChangeSortByName(e)}>
-            <option value=''>Sort by Name</option>
+            <option value=''>Sorted by Name</option>
             <option value='A-Z'>From A to Z</option>
             <option value='Z-A'>From Z to A</option>
         </select>
         <select onChange={(e)=>handleChangeSortByWeight(e)}>
-            <option value=''>Sort by weight</option>
+            <option value=''>Sorted by weight</option>
             <option value='lower-higher'>Lower to Higher  ⬇</option>
             <option value='higher-lower'>Higher to Lower  ⬆</option>
         </select>

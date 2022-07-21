@@ -6,9 +6,9 @@ const getTemperaments=require('../utils/getTemperaments.js');
 temperamentRouter.get('/',async(req,res)=>{
 const dataTemp= await getTemperaments();
 try{
-    const temperamentsDb=await Temperament.findAll();
+    const temperamentsDb=await Temperament.findAll({order:  [['name', 'ASC']]});
     if(!temperamentsDb.length){
-        dataTemp.map(temp=>
+        dataTemp.forEach(temp=>
             {Temperament.findOrCreate(
                {where:{name:temp}}
                )})

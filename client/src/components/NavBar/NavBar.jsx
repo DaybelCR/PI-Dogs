@@ -42,7 +42,6 @@ export class NavBar extends Component {
             <ul>
                 <li ><Link to='/' className={s.link_img}><img src={Pawprint} width="45" height="45" alt="logo-pawprint"  /></Link></li>
                 <li><Link to='/home' className={s.link}><img src={Casa} width="25" height="25" alt="logo-home"  /><span>Home</span></Link></li>
-                {/* <li><Link to='/about'>About</Link></li> */}
                 <li><Link to='/createDog'className={s.link}><img src={Writing} width="25" height="25" alt="logo-create" /><span>Create</span></Link></li>
             </ul>
         </nav>

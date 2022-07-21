@@ -16,6 +16,7 @@ export function getAllDogs(){
                     type:GET_DOGS,
                     payload:arrayDogs
                 }))
+                .catch(e=>console.log(e))
     }
 }
 
@@ -23,13 +24,17 @@ export  function onSearchByName(name){
     return async function(dispatch){
         const response=await fetch(`http://localhost:3001/dogs?name=${name}`);
         const data=await response.json();
-        if(Array.isArray(data)){
-            return dispatch({
-                type:ON_SEARCH_DOGS_BY_NAME,
-                payload:data
-            })
-        }else{
-            return alert(data.message);
+        try{
+            if(Array.isArray(data)){
+                return dispatch({
+                    type:ON_SEARCH_DOGS_BY_NAME,
+                    payload:data
+                })
+            }else{
+                return alert(data.message);
+            }
+        }catch(e){
+            console.log(e)
         }
        
     }
@@ -43,6 +48,7 @@ export function getTemperaments(){
                 type:GET_TEMPERAMENTS,
                 payload:data
                }))
+               .catch(e=>console.log(e))
     }
 }
 
@@ -53,6 +59,7 @@ export function getDogDetail(idRaza){
                         type:GET_DOGDETAIL,
                         payload:data
                      }))
+                     .catch(e=>console.log(e))
     }
 }
 
@@ -91,6 +98,7 @@ export function orderByWeigth(payload){
 export function postDog(payload){
     return async function(dispatch){
         axios.post('http://localhost:3001/dogs',payload)
-            .then(response=>response)
+            .then(response=>{return alert(response.data.message)})
+            .catch(e=>{return alert(e.response.data.message)})
    }
 }

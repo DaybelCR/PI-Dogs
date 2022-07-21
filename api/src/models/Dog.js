@@ -14,6 +14,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       unique:true,
       allowNull: false,
+      validate:{
+        isAlpha: true,
+      }
     },
     height:{
       type: DataTypes.STRING,

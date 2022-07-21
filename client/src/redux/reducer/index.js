@@ -49,7 +49,7 @@ switch(type){
             dogs:payload==="All-Data"?alldogsTwo:dogFilteredByData
         }
     case ORDER_BY_NAME:
-        const dogsSortByName=payload==='A-Z'&& payload!==''?
+        const dogsSortByName=payload==='A-Z'?
         state.dogs.sort((a,b)=>{
             if(a.name.toLowerCase()<b.name.toLowerCase()) return -1;
             if(a.name.toLowerCase()>b.name.toLowerCase()) return 1;
@@ -65,7 +65,7 @@ switch(type){
             dogs:dogsSortByName
         }
     case ORDER_BY_WEIGTH:
-        const dogsSortByWeigth=payload==='lower-higher'&& payload!==''?
+        const dogsSortByWeigth=payload==='lower-higher'?
         state.dogs.sort((a,b)=>Number(a.weight?.split('-')[0])-Number(b.weight?.split('-')[0])):
         state.dogs.sort((a,b)=>Number(b.weight?.split('-')[0])-Number(a.weight?.split('-')[0]))
         return{

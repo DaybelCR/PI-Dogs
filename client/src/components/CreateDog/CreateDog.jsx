@@ -8,6 +8,7 @@ import s from './CreateDog.module.css';
 const validate=(input)=>{
   let errors={};
   if(!input.name) errors.name='Warning: name is required';
+  else if(!/^([a-zA-ZñÑáéíóúÁÉÍÓÚ])+$/i.test(input.name)) errors.name='Warning: the name must only contain letters';
   else if(input.min_height==='0' && input.max_height==='0') errors.height='Warning: min and max height are required and can not be zero';
   else if(Number(input.min_height)>=Number(input.max_height)) errors.height='Warning: the [min height] must be less than [the max height]';
   else if(input.min_weight==='0' && input.max_weight==='0') errors.weight='Warning: min and max weight are required and can not be zero';
@@ -16,6 +17,7 @@ const validate=(input)=>{
   else if(Number(input.min_lifeSpan)>=Number(input.max_lifeSpan)) errors.life_span='Warning: the [min life span] must be less than the [max life span]';
   else if(!input.image) errors.image='image is required';
   else if(!input.temperaments.length) errors.temperaments='Warning: temperament is required';
+  else if(input.temperaments.length>6) errors.temperaments='Warning: you can only choose a maximum of 6 temperaments';
   return errors;
 }
 export  function CreateDog({temperaments,getTemperaments,postDog,history}) {
@@ -43,14 +45,16 @@ export  function CreateDog({temperaments,getTemperaments,postDog,history}) {
   function handleSelect(e){
   if(input.temperaments.some(t=>t===e.target.value)){
    setInput({...input,temperaments:[...input.temperaments]})
-   setErrors(validate( {...input,[e.target.name]:e.target.value}))
+   setErrors(validate( {...input,temperaments:[...input.temperaments]}))
   }else{
     setInput({
       ...input,
       temperaments:[...input.temperaments,e.target.value]
      })
-     setErrors(validate( {...input,
-      [e.target.name]:e.target.value}))
+     setErrors(validate( {
+      ...input,
+      temperaments:[...input.temperaments,e.target.value]
+     }))
   }
   }
 
@@ -60,6 +64,10 @@ export  function CreateDog({temperaments,getTemperaments,postDog,history}) {
       ...input,
       temperaments:input.temperaments.filter(t=>t!==element)
      })
+     setErrors(validate( {
+      ...input,
+      temperaments:input.temperaments.filter(t=>t!==element)
+     }))
   }
   function handleSubmit(e){
     e.preventDefault();
@@ -86,7 +94,6 @@ export  function CreateDog({temperaments,getTemperaments,postDog,history}) {
       alert("Complete all the fields");
     } else {
       postDog(breedCreated);
-      alert("Breed created!!!");
       history.push("/home");
     }
   }
@@ -160,7 +167,6 @@ export  function CreateDog({temperaments,getTemperaments,postDog,history}) {
        </div>
        <input type="submit" value="Create" />
        </form>
-     
     </div>
   )
 }
