@@ -8,9 +8,11 @@ import {FILTER_BY_TEMPERAMENT, FILTER_BY_TYPE_DATA, GET_DOGDETAIL,
 
 import axios from 'axios';
 
+const url="https://pi-dogs-48wy.onrender.com"
+
 export function getAllDogs(){
     return async function(dispatch){
-        return fetch('https://pi-dogs-7.herokuapp.com/dogs')
+        return fetch(`${url}/dogs`)
                 .then(response=>response.json())
                 .then(arrayDogs=>dispatch({
                     type:GET_DOGS,
@@ -22,7 +24,7 @@ export function getAllDogs(){
 
 export  function onSearchByName(name){
     return async function(dispatch){
-        const response=await fetch(`https://pi-dogs-7.herokuapp.com/dogs?name=${name}`);
+        const response=await fetch(`${url}/dogs?name=${name}`);
         const data=await response.json();
         try{
             if(Array.isArray(data)){
@@ -42,7 +44,7 @@ export  function onSearchByName(name){
 
 export function getTemperaments(){
     return async function(dispatch){
-        return fetch('https://pi-dogs-7.herokuapp.com/temperaments')
+        return fetch(`${url}/temperaments`)
                .then(response=>response.json())
                .then(data=>dispatch({
                 type:GET_TEMPERAMENTS,
@@ -54,7 +56,7 @@ export function getTemperaments(){
 
 export function getDogDetail(idRaza){
     return async function(dispatch){
-         return axios.get(`https://pi-dogs-7.herokuapp.com/dogs/${idRaza}`)
+         return axios.get(`${url}/dogs/${idRaza}`)
                      .then(({data})=>dispatch({
                         type:GET_DOGDETAIL,
                         payload:data
@@ -97,7 +99,7 @@ export function orderByWeigth(payload){
 
 export function postDog(payload){
     return async function(dispatch){
-        axios.post('https://pi-dogs-7.herokuapp.com/dogs',payload)
+        axios.post(`${url}/dogs`,payload)
             .then(response=>{return alert(response.data.message)})
             .catch(e=>{return alert(e.response.data.message)})
    }
