@@ -5,7 +5,7 @@ const axios= require('axios');
 const {Dog,Temperament}=require('../db.js');
 
 const getDogsApi=async()=>{
-const {data}=await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
+const {data}=await axios.get("https://api.thedogapi.com/v1/breeds");
 const arrayDogsApi=data.map(objDog=>{
     return{
         id:objDog.id,
@@ -14,7 +14,7 @@ const arrayDogsApi=data.map(objDog=>{
         weight:objDog.weight.metric==='NaN'?'21 - 28':
         (objDog.weight.metric==='NaN - 8')?'6 - 8':objDog.weight.metric,
         life_span:objDog.life_span,
-        image:objDog.image.url?objDog.image.url:null,
+        image:objDog.reference_image_id?`https://cdn2.thedogapi.com/images/${objDog.reference_image_id}.jpg`:null,
         temperaments:objDog.temperament?objDog.temperament:null
     }
 })
@@ -40,7 +40,7 @@ const getDogs=async()=>{
 }
 
 const searchName=async (name)=>{
-   const {data}= await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}&&api_key=${API_KEY}`)
+   const {data}= await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
    const arrayDogsByName=data.map(objDog=>{
     return{
         id:objDog.id,
